@@ -1,28 +1,34 @@
 import customtkinter
 
-button = NotImplemented
+class checkbox_frame(customtkinter.CTkFrame):
+    def __init__(self,master):
+        super().__init__(master)
 
-def button_function():
-
-    print("Ze button has been pressed!")
-
-app = customtkinter.CTk()
-app.title("The coolest Name")
-app.geometry("500x500")
-
-button = customtkinter.CTkButton(app, text="Lets go!",command=button_function)
-button.grid(row=0,column=0,padx=20,pady=20,sticky="ewsn",columnspan=2)
-
-app.grid_columnconfigure((0,1), weight=1)
-app.grid_rowconfigure(0,weight=1)
+        self.checkbox_1 = customtkinter.CTkCheckBox(self,text="checkbox 1")
+        self.checkbox_1.grid(row = 0,column = 0,pady=10,padx=10,sticky = "w")
+        self.checkbox_2 = customtkinter.CTkCheckBox(self,text="checkbox 2")
+        self.checkbox_2.grid(row = 1,column = 0,pady=10,padx=10,sticky = "w")
 
 
 
-checkbox_1 = customtkinter.CTkCheckBox(app,text="Check Me Check Me plz!!")
-checkbox_1.grid(row=1,column=0,padx=20,pady=(0,20),sticky="w")
+class App(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
 
-checkbox_2 = customtkinter.CTkCheckBox(app,text="Me too Me too!!!!")
-checkbox_2.grid(row=1,column=1,padx=20,pady=(0,20),sticky="w")
+        self.title("my app")
+        self.geometry("400x180")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(0, weight=1)
+
+        self.frame = checkbox_frame(self)
+        self.frame.grid(row=0,column=0,pady=10,padx=10,sticky="nws")
 
 
+        self.button = customtkinter.CTkButton(self, text="my button", command=self.button_callback)
+        self.button.grid(row=1, column=0, padx=10, pady=10, sticky="ew")
+
+    def button_callback(self):
+        print("button pressed")
+
+app = App()
 app.mainloop()
